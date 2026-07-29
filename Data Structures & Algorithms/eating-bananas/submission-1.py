@@ -1,0 +1,33 @@
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        
+        # strat: make a list of all of the times with different 
+        # bananas-per-hour eating rates, from 1 to 
+        # the height of the highest pile. Perform 
+        # binary search on it, each time calculating the number 
+        # of hours it would take to eat the banaanas 
+
+        l = 1 
+        m = 1 
+        r = max(piles)
+
+        while l <= r: 
+            m = l + (r - l) // 2
+            
+            # calculate the time 
+            time = 0
+            for i in range(len(piles)): 
+                time += math.ceil(piles[i] / m)
+            
+            if time < h:
+                r = m - 1
+            elif time > h: 
+                l = m + 1 
+            else: 
+                return m
+        
+        return 2
+        
+
+
+
